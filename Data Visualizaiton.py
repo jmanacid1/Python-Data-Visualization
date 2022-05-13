@@ -36,4 +36,4 @@ plt.style.use('seaborn')
 print()
 fig, ax = plt.subplots()  # Create a figure containing a single axes.
 
-ax.scatter(randWSalk.genXCoords,randWalk.genYCoords)
+ax.scatter(randWalk.genXCoords,randWalk.genYCoords)
