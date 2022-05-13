@@ -1,5 +1,7 @@
 from urllib import response
 import requests
+from plotly.graph_objs import bar
+from plotly import offline
 
 
 url = "https://api.github.com/search/repositories?q=language:python&sort=stars"
@@ -17,10 +19,23 @@ repo_dict = repo_dicts[0]
 print(f"\nKeys: {len(repo_dict)}")
 for x in sorted(repo_dict.keys()):
     print(x)
-print('\n')
-print(repo_dict['trees_url'])
 
+repo_name,repo_stars = [],[]
+for repo in repo_dicts:
+    repo_name.append(repo['name'])
+    repo_stars.append(repo['stargazers_count'])
+print(repo_name,repo_stars)
 
-# trying something out
-print('trying something')
+data = {
+    'type': 'bar',
+    'x': repo_name,
+    'y': repo_stars,
+}
+layout = {
+    'title': 'Most Starred Python Repos',
+    'xaxis': {'title': 'Repository'},
+    'yaxis': {'title': 'Stars'},
+    }
+fig = {'data':data, 'layout':layout}
+offline.plot(fig,filename="python_repos.html")
 
